@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VedaMath</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #182033;
+    min-height: 100vh;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.app {
+    max-width: 1100px;
+    margin: auto;
+    min-height: 100vh;
+    padding-bottom: 90px;
+}
+
+/* LOGIN */
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.login-card {
+    background: white;
+    width: 100%;
+    max-width: 430px;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+}
+
+.logo {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.logo span {
+    color: #635bff;
+}
+
+.subtitle {
+    color: #737b8c;
+    margin-bottom: 30px;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #dfe3eb;
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    font-size: 15px;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.primary {
+    width: 100%;
+    padding: 15px;
+    background: #635bff;
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.primary:hover {
+    opacity: 0.9;
+}
+
+/* HEADER */
+
+.header {
+    padding: 25px 25px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.header-logo span {
+    color: #635bff;
+}
+
+.streak {
+    background: #fff1d8;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+/* PAGES */
+
+.page {
+    padding: 20px 25px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.hero {
+    background: linear-gradient(135deg, #635bff, #8c85ff);
+    color: white;
+    padding: 30px;
+    border-radius: 25px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    opacity: 0.9;
+}
+
+/* CARDS */
+
+.section-title {
+    margin: 25px 0 15px;
+    font-size: 21px;
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.topic-card {
+    background: white;
+    padding: 22px;
+    border-radius: 18px;
+    border: 1px solid #e8ebf2;
+    transition: 0.2s;
+}
+
+.topic-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+}
+
+.topic-number {
+    color: #635bff;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.topic-card h3 {
+    margin-bottom: 8px;
+}
+
+.topic-card p {
+    color: #737b8c;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.topic-card button {
+    margin-top: 16px;
+    background: #635bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+/* LESSON */
+
+.lesson-card {
+    background: white;
+    padding: 30px;
+    border-radius: 22px;
+    line-height: 1.7;
+}
+
+.method-box {
+    background: #f1f0ff;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.example {
+    background: #f7f8fa;
+    padding: 18px;
+    border-radius: 14px;
+    margin-top: 15px;
+}
+
+.example strong {
+    color: #635bff;
+}
+
+.back-btn {
+    background: transparent;
+    color: #635bff;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+/* PRACTICE */
+
+.question-card {
+    background: white;
+    padding: 35px;
+    border-radius: 22px;
+    text-align: center;
+}
+
+.question {
+    font-size: 38px;
+    font-weight: 800;
+    margin: 25px 0;
+}
+
+.answer-input {
+    max-width: 300px;
+    margin: auto;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+}
+
+.feedback {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 14px;
+    background: #f1f0ff;
+}
+
+.feedback.correct {
+    background: #e7f8ed;
+}
+
+.feedback.wrong {
+    background: #fff0f0;
+}
+
+.next-btn {
+    margin-top: 18px;
+    padding: 13px 25px;
+    background: #635bff;
+    color: white;
+    border-radius: 12px;
+}
+
+/* RESULTS */
+
+.result-card {
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.score {
+    font-size: 65px;
+    font-weight: 900;
+    color: #635bff;
+    margin: 20px;
+}
+
+/* PROFILE */
+
+.profile-card {
+    background: white;
+    padding: 30px;
+    border-radius: 22px;
+}
+
+.profile-avatar {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #635bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.stat {
+    background: #f7f8fa;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat h2 {
+    color: #635bff;
+}
+
+/* CLASS CHANGE */
+
+.class-box {
+    margin-top: 25px;
+    padding: 22px;
+    background: #f7f8fa;
+    border-radius: 17px;
+}
+
+.change-class-btn {
+    margin-top: 12px;
+    padding: 12px 18px;
+    background: #635bff;
+    color: white;
+    border-radius: 10px;
+}
+
+.confirm-box {
+    margin-top: 15px;
+    padding: 18px;
+    background: #eeeefe;
+    border-radius: 14px;
+}
+
+.confirm-box button {
+    padding: 10px 15px;
+    border-radius: 9px;
+    margin-right: 8px;
+}
+
+.confirm-yes {
+    background: #635bff;
+    color: white;
+}
+
+.confirm-no {
+    background: #ddd;
+}
+
+/* NAV */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1100px, 100%);
+    background: white;
+    border-top: 1px solid #e5e7ec;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 10px;
+    z-index: 100;
+}
+
+.nav-btn {
+    background: transparent;
+    color: #8b92a1;
+    padding: 8px 20px;
+    font-weight: 700;
+}
+
+.nav-btn.active {
+    color: #635bff;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    .header {
+        padding: 20px;
+    }
+
+    .page {
+        padding: 15px 20px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .question {
+        font-size: 30px;
+    }
+
+    .login-card {
+        padding: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+        <div class="logo">
+            Veda<span>Math</span>
+        </div>
+
+        <p class="subtitle">
+            Learn smarter. Calculate faster.
+        </p>
+
+        <label>Your Name</label>
+        <input id="nameInput" placeholder="Enter your name">
+
+        <label>Current Class</label>
+        <select id="classInput">
+            <option value="1">Class 1</option>
+            <option value="2">Class 2</option>
+            <option value="3">Class 3</option>
+            <option value="4">Class 4</option>
+            <option value="5">Class 5</option>
+            <option value="6">Class 6</option>
+            <option value="7">Class 7</option>
+            <option value="8">Class 8</option>
+            <option value="9">Class 9</option>
+            <option value="10">Class 10</option>
+        </select>
+
+        <button class="primary" onclick="login()">
+            Start Learning
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN APP -->
+
+<div id="app" class="app hidden">
+
+    <div class="header">
+
+        <div class="header-logo">
+            Veda<span>Math</span>
+        </div>
+
+        <div class="streak">
+            🔥 <span id="streakText">0</span> day
+        </div>
+
+    </div>
+
+
+    <!-- HOME -->
+
+    <section id="homePage" class="page">
+
+        <div class="hero">
+
+            <h1 id="welcomeText">
+                Welcome!
+            </h1>
+
+            <p id="classText">
+                Let's start learning.
+            </p>
+
+        </div>
+
+        <h2 class="section-title">
+            Your Learning Path
+        </h2>
+
+        <div id="topicGrid" class="topic-grid"></div>
+
+    </section>
+
+
+    <!-- LESSON -->
+
+    <section id="lessonPage" class="page hidden">
+
+        <button class="back-btn" onclick="showHome()">
+            ← Back to Topics
+        </button>
+
+        <div id="lessonContent"></div>
+
+    </section>
+
+
+    <!-- PRACTICE -->
+
+    <section id="practicePage" class="page hidden">
+
+        <button class="back-btn" onclick="showHome()">
+            ← Exit Practice
+        </button>
+
+        <div id="practiceContent"></div>
+
+    </section>
+
+
+    <!-- RESULTS -->
+
+    <section id="resultsPage" class="page hidden">
+
+        <div class="result-card">
+
+            <h1>Practice Complete 🎉</h1>
+
+            <div id="resultScore" class="score">
+                0/5
+            </div>
+
+            <p id="resultMessage"></p>
+
+            <br>
+
+            <button class="primary" onclick="showHome()">
+                Continue Learning
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <section id="profilePage" class="page hidden">
+
+        <div class="profile-card">
+
+            <div id="profileAvatar" class="profile-avatar">
+                A
+            </div>
+
+            <h2 id="profileName">
+                Student
+            </h2>
+
+            <p id="profileClass">
+                Class 1
+            </p>
+
+
+            <div class="class-box">
+
+                <h3>🎓 Current Class</h3>
+
+                <p style="margin-top:8px;color:#737b8c;">
+                    Your learning path is currently set to:
+                </p>
+
+                <select id="changeClassSelect"></select>
+
+                <button
+                    class="change-class-btn"
+                    onclick="askChangeClass()">
+                    Change Class
+                </button>
+
+                <div id="confirmBox" class="confirm-box hidden">
+
+                    <p id="confirmText"></p>
+
+                    <br>
+
+                    <button
+                        class="confirm-yes"
+                        onclick="confirmChangeClass()">
+                        Yes, Change Class
+                    </button>
+
+                    <button
+                        class="confirm-no"
+                        onclick="cancelChangeClass()">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-grid">
+
+                <div class="stat">
+                    <h2 id="topicsCompleted">0</h2>
+                    <p>Topics Done</p>
+                </div>
+
+                <div class="stat">
+                    <h2 id="questionsSolved">0</h2>
+                    <p>Questions</p>
+                </div>
+
+                <div class="stat">
+                    <h2 id="bestScore">0%</h2>
+                    <p>Best Score</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- NAV -->
+
+    <nav class="bottom-nav">
+
+        <button
+            id="homeNav"
+            class="nav-btn active"
+            onclick="showHome()">
+            🏠 Home
+        </button>
+
+        <button
+            id="profileNav"
+            class="nav-btn"
+            onclick="showProfile()">
+            👤 Profile
+        </button>
+
+    </nav>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   USER DATA
+===================================================== */
+
+let user = {
+    name: "",
+    currentClass: 1
+};
+
+let progress = {};
+
+let selectedTopic = null;
+
+let practiceIndex = 0;
+let practiceScore = 0;
+let currentQuestions = [];
+
+let pendingClass = null;
+
+
+/* =====================================================
+   CURRICULUM
+===================================================== */
+
+const curriculum = {
+
+1: [
+    ["Number Bonds to 10",
+     "Learn pairs of numbers that quickly make 10.",
+     "Example: 7 + 3 = 10."],
+
+    ["Fast Addition",
+     "Break numbers into easy parts before adding.",
+     "Example: 8 + 5 = 8 + 2 + 3 = 13."],
+
+    ["Smart Subtraction",
+     "Use friendly numbers to make subtraction easier.",
+     "Example: 15 - 9 = 15 - 10 + 1 = 6."],
+
+    ["Doubling Tricks",
+     "Learn to double small numbers quickly.",
+     "Example: double 7 = 14."],
+
+    ["Halving",
+     "Learn how to find half of even numbers.",
+     "Example: half of 18 = 9."],
+
+    ["Times Tables",
+     "Build fast multiplication recall.",
+     "Example: 4 × 5 = 20."]
+],
+
+2: [
+    ["Addition to 100",
+     "Break numbers into tens and ones.",
+     "Example: 46 + 23 = 60 + 9 = 69."],
+
+    ["Subtraction to 100",
+     "Subtract tens first and then ones.",
+     "Example: 57 - 24 = 33."],
+
+    ["Multiplication Basics",
+     "Understand multiplication as repeated addition.",
+     "Example: 4 × 3 = 12."],
+
+    ["Division Basics",
+     "Understand division as sharing equally.",
+     "Example: 12 ÷ 3 = 4."],
+
+    ["Double & Half",
+     "Use doubling and halving to calculate faster.",
+     "Example: double 25 = 50."],
+
+    ["Easy Squares",
+     "Recognize small square numbers.",
+     "Example: 6² = 36."]
+],
+
+3: [
+    ["Left-to-Right Addition",
+     "Add from the largest place value first.",
+     "Example: 34 + 25 → 30 + 20 + 4 + 5 = 59."],
+
+    ["Complements",
+     "Find numbers that complete 10, 100 or another base.",
+     "Example: complement of 37 to 100 = 63."],
+
+    ["Multiplication by 11",
+     "Use the special pattern for multiplying two-digit numbers by 11.",
+     "Example: 23 × 11 = 253."],
+
+    ["Mental Division",
+     "Use known multiplication facts to divide quickly.",
+     "Example: 72 ÷ 8 = 9."],
+
+    ["Squares 1–20",
+     "Build quick recall of common square numbers.",
+     "Example: 14² = 196."],
+
+    ["Fractions",
+     "Understand common fractions mentally.",
+     "Example: half of 20 = 10."],
+
+    ["Easy Percentages",
+     "Use 10%, 50% and other friendly percentages.",
+     "Example: 10% of 80 = 8."]
+],
+
+4: [
+    ["Left-to-Right Addition",
+     "Add hundreds, tens and ones progressively.",
+     "Example: 243 + 126 = 369."],
+
+    ["Compensation Subtraction",
+     "Round the number you subtract, then compensate.",
+     "Example: 63 - 29 = 63 - 30 + 1 = 34."],
+
+    ["Multiplication by 11",
+     "Use the digit pattern for two-digit numbers.",
+     "Example: 34 × 11 = 374."],
+
+    ["Multiplication by 25",
+     "Use division by 4 followed by multiplication by 100.",
+     "Example: 48 × 25 = 48 ÷ 4 × 100 = 1200."],
+
+    ["Multiplication by 5",
+     "Multiply by 10 and halve.",
+     "Example: 36 × 5 = 180."],
+
+    ["Squares Ending in 5",
+     "Use the ending-5 square shortcut.",
+     "Example: 35² = 1225."],
+
+    ["Mental Division",
+     "Use friendly factors for quick division.",
+     "Example: 144 ÷ 12 = 12."],
+
+    ["10%, 25% & 50%",
+     "Use fractions to calculate common percentages.",
+     "Example: 25% of 80 = 20."]
+],
+
+5: [
+    ["Multiplication by 11",
+     "Learn a fast pattern for multiplying two-digit numbers by 11.",
+     "Example: 42 × 11 = 462."],
+
+    ["Multiplication by 25",
+     "Use ×100 ÷4.",
+     "Example: 64 ×25 = 1600."],
+
+    ["Multiplication by 50",
+     "Use ×100 ÷2.",
+     "Example: 38 ×50 = 1900."],
+
+    ["Squares Ending in 5",
+     "Multiply the number before 5 by the next number and append 25.",
+     "Example: 45² → 4×5 = 20 → 2025."],
+
+    ["Near-Base Multiplication",
+     "Use a nearby base such as 10, 100 or 1000.",
+     "Example: 98 × 97 can be handled around base 100."],
+
+    ["Fast Percentages",
+     "Break percentages into easy parts.",
+     "Example: 15% = 10% + 5%."],
+
+    ["Fraction Thinking",
+     "Convert common fractions into useful mental calculations.",
+     "Example: 3/4 of 80 = 60."],
+
+    ["Speed Maths",
+     "Mix different mental calculation techniques.",
+     "Example: solve friendly calculations without writing."]
+],
+
+6: [
+    ["Advanced Mental Addition",
+     "Use place-value decomposition for larger numbers.",
+     "Example: 347 + 256 = 603."],
+
+    ["Advanced Complements",
+     "Find complements to 100, 1000 and larger bases.",
+     "Example: complement of 763 to 1000 = 237."],
+
+    ["Multiplication by 11 and 12",
+     "Use patterns and distributive thinking.",
+     "Example: 24 × 12 = 24 × 10 + 24 × 2."],
+
+    ["Multiplication by 25 and 50",
+     "Convert these multipliers into easy ×100 operations.",
+     "Example: 72 ×25 = 1800."],
+
+    ["Squares Ending in 5",
+     "Apply the standard ending-5 square shortcut.",
+     "Example: 65² = 4225."],
+
+    ["Near-Base Multiplication",
+     "Multiply numbers close to powers of 10.",
+     "Example: 102 × 97 can be viewed around 100."],
+
+    ["Mental Division",
+     "Use factors and known multiplication facts.",
+     "Example: 360 ÷ 15 = 24."],
+
+    ["Mental Percentages",
+     "Combine 10%, 5%, 1% and related pieces.",
+     "Example: 16% = 10% + 5% + 1%."],
+
+    ["Fraction Operations",
+     "Calculate common fractions efficiently.",
+     "Example: 2/3 of 90 = 60."],
+
+    ["Speed Maths",
+     "Practice mixed calculations under time pressure.",
+     "Example: solve several calculations mentally."]
+],
+
+7: [
+    ["Near-Base Multiplication",
+     "Use a nearby base for numbers close to 100.",
+     "Example: 98 × 96."],
+
+    ["Fast Squaring",
+     "Use algebraic patterns to square numbers.",
+     "Example: 52² = (50+2)²."],
+
+    ["Squares Ending in 5",
+     "Use the ending-5 shortcut.",
+     "Example: 85² = 7225."],
+
+    ["Mental Percentages",
+     "Build percentages from 1%, 5% and 10%.",
+     "Example: 35% = 30% + 5%."],
+
+    ["Mental Fractions",
+     "Find fractions of numbers quickly.",
+     "Example: 5/8 of 64 = 40."],
+
+    ["Division by Friendly Numbers",
+     "Break difficult divisors into manageable factors.",
+     "Example: 240 ÷ 15 = 16."],
+
+    ["Decimal Speed",
+     "Calculate common decimal operations mentally.",
+     "Example: 2.5 × 4 = 10."],
+
+    ["Speed Maths",
+     "Combine multiple techniques in timed practice.",
+     "Example: solve mixed calculations quickly."]
+],
+
+8: [
+    ["Near-Base Multiplication",
+     "Use base 100 or 1000 for close numbers.",
+     "Example: 103 × 98."],
+
+    ["Algebraic Squaring",
+     "Use identities such as (a+b)².",
+     "Example: 48² = (50-2)²."],
+
+    ["Cube Patterns",
+     "Understand patterns useful for common cubes.",
+     "Example: 10³ = 1000."],
+
+    ["Percentage Change",
+     "Calculate increases and decreases efficiently.",
+     "Example: increase 200 by 15%."],
+
+    ["Fraction & Ratio Speed",
+     "Use proportional thinking to solve quickly.",
+     "Example: 2:3 of 50."],
+
+    ["Decimal Multiplication",
+     "Use place value and integer multiplication.",
+     "Example: 2.4 × 5 = 12."],
+
+    ["Fast Division",
+     "Use factorization and compensation.",
+     "Example: 1000 ÷ 25 = 40."],
+
+    ["Speed Maths",
+     "Combine techniques in mixed calculations.",
+     "Example: solve several problems rapidly."]
+],
+
+9: [
+    ["Advanced Near-Base",
+     "Handle larger numbers close to a convenient base.",
+     "Example: 997 × 994."],
+
+    ["Algebraic Squares",
+     "Apply identities to simplify squaring.",
+     "Example: 103² = (100+3)²."],
+
+    ["Cube Techniques",
+     "Explore efficient ways to calculate selected cubes.",
+     "Example: 12³ = 1728."],
+
+    ["Advanced Percentages",
+     "Combine percentage changes and mental decomposition.",
+     "Example: 20% increase followed by 10% decrease."],
+
+    ["Fraction & Ratio Mastery",
+     "Solve more complex fraction and ratio calculations.",
+     "Example: simplify and compare ratios."],
+
+    ["Decimal Techniques",
+     "Work quickly with decimal multiplication and division.",
+     "Example: 0.25 × 48 = 12."],
+
+    ["Advanced Division",
+     "Use factorization and estimation.",
+     "Example: 1875 ÷ 25 = 75."],
+
+    ["Competitive Speed Maths",
+     "Practice rapid mixed calculations."]
+],
+
+10: [
+    ["Near-Base Multiplication",
+     "Master multiplication around convenient bases.",
+     "Example: 998 × 997."],
+
+    ["Fast Squaring",
+     "Use identities and near-base methods.",
+     "Example: 97² = (100-3)²."],
+
+    ["Fast Cubing",
+     "Use algebraic structure to simplify selected cubes.",
+     "Example: 19³."],
+
+    ["Advanced Percentages",
+     "Solve percentage changes and comparisons quickly.",
+     "Example: successive percentage changes."],
+
+    ["Fraction Mastery",
+     "Work efficiently with fractions and proportions.",
+     "Example: compound fraction calculations."],
+
+    ["Decimal Mastery",
+     "Build speed with decimal multiplication and division.",
+     "Example: 12.5 × 8 = 100."],
+
+    ["Advanced Division",
+     "Use factors, estimation and compensation.",
+     "Example: divide large numbers mentally."],
+
+    ["Exam Speed Maths",
+     "Mixed practice designed for fast calculation."]
+]
+
+};
+
+
+/* =====================================================
+   PRACTICE QUESTIONS
+===================================================== */
+
+const practiceBank = {
+
+"Multiplication by 11": [
+    {q:"23 × 11", a:253, e:"23 × 11 = 23 × 10 + 23 = 230 + 23 = 253."},
+    {q:"34 × 11", a:374, e:"34 × 11 = 34 × 10 + 34 = 340 + 34 = 374."},
+    {q:"42 × 11", a:462, e:"42 × 11 = 420 + 42 = 462."},
+    {q:"51 × 11", a:561, e:"51 × 11 = 510 + 51 = 561."},
+    {q:"62 × 11", a:682, e:"62 × 11 = 620 + 62 = 682."}
+],
+
+"Multiplication by 25": [
+    {q:"48 × 25", a:1200, e:"48 × 25 = 48 ÷ 4 × 100 = 12 × 100 = 1200."},
+    {q:"64 × 25", a:1600, e:"64 ÷ 4 = 16, then ×100 = 1600."},
+    {q:"36 × 25", a:900, e:"36 ÷ 4 = 9, then ×100 = 900."},
+    {q:"80 × 25", a:2000, e:"80 ÷ 4 = 20, then ×100 = 2000."},
+    {q:"44 × 25", a:1100, e:"44 ÷ 4 = 11, then ×100 = 1100."}
+],
+
+"Multiplication by 50": [
+    {q:"38 × 50", a:1900, e:"38 × 50 = 38 × 100 ÷ 2 = 3800 ÷ 2 = 1900."},
+    {q:"24 × 50", a:1200, e:"24 × 100 ÷ 2 = 1200."},
+    {q:"42 × 50", a:2100, e:"42 × 100 ÷ 2 = 2100."},
+    {q:"16 × 50", a:800, e:"16 × 100 ÷ 2 = 800."},
+    {q:"60 × 50", a:3000, e:"60 × 100 ÷ 2 = 3000."}
+],
+
+"Squares Ending in 5": [
+    {q:"25²", a:625, e:"2 × 3 = 6, then append 25 → 625."},
+    {q:"35²", a:1225, e:"3 × 4 = 12, then append 25 → 1225."},
+    {q:"45²", a:2025, e:"4 × 5 = 20, then append 25 → 2025."},
+    {q:"55²", a:3025, e:"5 × 6 = 30, then append 25 → 3025."},
+    {q:"65²", a:4225, e:"6 × 7 = 42, then append 25 → 4225."}
+],
+
+"Easy Squares": [
+    {q:"6²", a:36, e:"6 × 6 = 36."},
+    {q:"7²", a:49, e:"7 × 7 = 49."},
+    {q:"8²", a:64, e:"8 × 8 = 64."},
+    {q:"9²", a:81, e:"9 × 9 = 81."},
+    {q:"10²", a:100, e:"10 × 10 = 100."}
+],
+
+"Fast Addition": [
+    {q:"8 + 5", a:13, e:"8 + 2 = 10, then +3 = 13."},
+    {q:"7 + 6", a:13, e:"7 + 3 = 10, then +3 = 13."},
+    {q:"9 + 8", a:17, e:"9 + 1 = 10, then +7 = 17."},
+    {q:"6 + 7", a:13, e:"6 + 4 = 10, then +3 = 13."},
+    {q:"15 + 7", a:22, e:"15 + 5 = 20, then +2 = 22."}
+],
+
+"Smart Subtraction": [
+    {q:"15 - 9", a:6, e:"15 - 10 + 1 = 6."},
+    {q:"18 - 9", a:9, e:"18 - 10 + 1 = 9."},
+    {q:"24 - 9", a:15, e:"24 - 10 + 1 = 15."},
+    {q:"32 - 19", a:13, e:"32 - 20 + 1 = 13."},
+    {q:"50 - 29", a:21, e:"50 - 30 + 1 = 21."}
+],
+
+"Multiplication Basics": [
+    {q:"4 × 3", a:12, e:"4 groups of 3 = 12."},
+    {q:"5 × 4", a:20, e:"5 groups of 4 = 20."},
+    {q:"6 × 3", a:18, e:"6 groups of 3 = 18."},
+    {q:"7 × 2", a:14, e:"7 groups of 2 = 14."},
+    {q:"8 × 5", a:40, e:"8 groups of 5 = 40."}
+],
+
+"Double & Half": [
+    {q:"Double 25", a:50, e:"25 + 25 = 50."},
+    {q:"Double 18", a:36, e:"18 + 18 = 36."},
+    {q:"Half of 20", a:10, e:"20 ÷ 2 = 10."},
+    {q:"Half of 36", a:18, e:"36 ÷ 2 = 18."},
+    {q:"Double 45", a:90, e:"45 + 45 = 90."}
+]
+
+};
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+function loadData() {
+
+    const savedUser = localStorage.getItem("vedamathUser");
+    const savedProgress = localStorage.getItem("vedamathProgress");
+
+    if(savedUser) {
+        user = JSON.parse(savedUser);
+    }
+
+    if(savedProgress) {
+        progress = JSON.parse(savedProgress);
+    }
+
+}
+
+
+function saveData() {
+
+    localStorage.setItem(
+        "vedamathUser",
+        JSON.stringify(user)
+    );
+
+    localStorage.setItem(
+        "vedamathProgress",
+        JSON.stringify(progress)
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login() {
+
+    const name = document.getElementById("nameInput").value.trim();
+
+    if(!name) {
+        alert("Please enter your name.");
+        return;
+    }
+
+    user.name = name;
+
+    user.currentClass =
+        Number(document.getElementById("classInput").value);
+
+    saveData();
+
+    document
+        .getElementById("loginScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("app")
+        .classList.remove("hidden");
+
+    updateAll();
+
+    showHome();
+
+}
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+function initialize() {
+
+    loadData();
+
+    if(user.name) {
+
+        document
+            .getElementById("loginScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("app")
+            .classList.remove("hidden");
+
+        updateAll();
+
+    }
+
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+function renderHome() {
+
+    document.getElementById("welcomeText").innerText =
+        "Welcome back, " + user.name + " 👋";
+
+    document.getElementById("classText").innerText =
+        "You're learning at Class " + user.currentClass + " level.";
+
+    const grid =
+        document.getElementById("topicGrid");
+
+    grid.innerHTML = "";
+
+    const topics = curriculum[user.currentClass];
+
+    topics.forEach((topic, index) => {
+
+        const card = document.createElement("div");
+
+        card.className = "topic-card";
+
+        card.innerHTML = `
+
+            <div class="topic-number">
+                TOPIC ${index + 1}
+            </div>
+
+            <h3>${topic[0]}</h3>
+
+            <p>${topic[1]}</p>
+
+            <button onclick="openLesson(${index})">
+                Learn →
+            </button>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   LESSON
+===================================================== */
+
+function openLesson(index) {
+
+    selectedTopic =
+        curriculum[user.currentClass][index];
+
+    const title = selectedTopic[0];
+    const description = selectedTopic[1];
+    const example = selectedTopic[2];
+
+    const lessonContent =
+        document.getElementById("lessonContent");
+
+    lessonContent.innerHTML = `
+
+        <div class="lesson-card">
+
+            <h1>${title}</h1>
+
+            <br>
+
+            <p>
+                ${description}
+            </p>
+
+            <div class="method-box">
+
+                <h3>🧠 Method</h3>
+
+                <p>
+                    Understand the numbers first.
+                    Break the calculation into smaller,
+                    easier parts and solve it mentally.
+                </p>
+
+            </div>
+
+            <div class="example">
+
+                <strong>Example</strong>
+
+                <p>${example}</p>
+
+            </div>
+
+            <div class="example">
+
+                <strong>Why it works</strong>
+
+                <p>
+                    The method reduces a larger calculation
+                    into smaller calculations that are easier
+                    to handle mentally.
+                </p>
+
+            </div>
+
+            <br>
+
+            <button
+                class="primary"
+                onclick="startPractice()">
+
+                Practice This Topic
+
+            </button>
+
+        </div>
+    `;
+
+    hidePages();
+
+    document
+        .getElementById("lessonPage")
+        .classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   PRACTICE
+===================================================== */
+
+function startPractice() {
+
+    const title = selectedTopic[0];
+
+    currentQuestions =
+        practiceBank[title] || createGenericQuestions(title);
+
+    practiceIndex = 0;
+    practiceScore = 0;
+
+    renderQuestion();
+
+    hidePages();
+
+    document
+        .getElementById("practicePage")
+        .classList.remove("hidden");
+
+}
+
+
+function createGenericQuestions(title) {
+
+    return [
+
+        {
+            q: "12 + 8",
+            a: 20,
+            e: "12 + 8 = 20."
+        },
+
+        {
+            q: "25 + 15",
+            a: 40,
+            e: "25 + 15 = 40."
+        },
+
+        {
+            q: "30 - 12",
+            a: 18,
+            e: "30 - 12 = 18."
+        },
+
+        {
+            q: "6 × 7",
+            a: 42,
+            e: "6 × 7 = 42."
+        },
+
+        {
+            q: "100 ÷ 4",
+            a: 25,
+            e: "100 ÷ 4 = 25."
+        }
+
+    ];
+
+}
+
+
+function renderQuestion() {
+
+    const q = currentQuestions[practiceIndex];
+
+    const container =
+        document.getElementById("practiceContent");
+
+    container.innerHTML = `
+
+        <div class="question-card">
+
+            <p>
+                Question ${practiceIndex + 1}
+                of ${currentQuestions.length}
+            </p>
+
+            <div class="question">
+                ${q.q}
+            </div>
+
+            <input
+                id="answerInput"
+                class="answer-input"
+                type="number"
+                placeholder="Your answer"
+                onkeydown="if(event.key==='Enter') checkAnswer()"
+            >
+
+            <button
+                class="next-btn"
+                onclick="checkAnswer()">
+
+                Check Answer
+
+            </button>
+
+            <div id="feedback"></div>
+
+        </div>
+    `;
+
+    setTimeout(() => {
+
+        document
+            .getElementById("answerInput")
+            ?.focus();
+
+    }, 100);
+
+}
+
+
+function checkAnswer() {
+
+    const input =
+        document.getElementById("answerInput");
+
+    const answer =
+        Number(input.value);
+
+    const q =
+        currentQuestions[practiceIndex];
+
+    const feedback =
+        document.getElementById("feedback");
+
+    if(input.value === "") {
+
+        alert("Enter an answer first.");
+
+        return;
+
+    }
+
+
+    if(answer === q.a) {
+
+        practiceScore++;
+
+        feedback.innerHTML = `
+
+            <div class="feedback correct">
+
+                <strong>✅ Correct!</strong>
+
+                <p>
+                    Great work. Keep going!
+                </p>
+
+                <button
+                    class="next-btn"
+                    onclick="nextQuestion()">
+
+                    Next Question →
+
+                </button>
+
+            </div>
+
+        `;
+
+    } else {
+
+        feedback.innerHTML = `
+
+            <div class="feedback wrong">
+
+                <strong>❌ Not quite.</strong>
+
+                <p>
+                    Correct answer:
+                    <b>${q.a}</b>
+                </p>
+
+                <br>
+
+                <p>
+                    ${q.e}
+                </p>
+
+                <button
+                    class="next-btn"
+                    onclick="nextQuestion()">
+
+                    Next Question →
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+function nextQuestion() {
+
+    practiceIndex++;
+
+    if(practiceIndex >= currentQuestions.length) {
+
+        finishPractice();
+
+    } else {
+
+        renderQuestion();
+
+    }
+
+}
+
+
+/* =====================================================
+   RESULTS
+===================================================== */
+
+function finishPractice() {
+
+    const total =
+        currentQuestions.length;
+
+    const percentage =
+        Math.round((practiceScore / total) * 100);
+
+    saveTopicProgress(percentage);
+
+    document.getElementById("resultScore").innerText =
+        practiceScore + "/" + total;
+
+    let message = "";
+
+    if(percentage === 100) {
+
+        message = "🔥 Perfect score! You're flying!";
+
+    } else if(percentage >= 80) {
+
+        message = "💪 Excellent work! Keep building speed.";
+
+    } else if(percentage >= 60) {
+
+        message = "👍 Good job! A little more practice will help.";
+
+    } else {
+
+        message = "🧠 Keep practicing. You'll get faster.";
+
+    }
+
+    document
+        .getElementById("resultMessage")
+        .innerText = message;
+
+    hidePages();
+
+    document
+        .getElementById("resultsPage")
+        .classList.remove("hidden");
+
+}
+
+
+function saveTopicProgress(score) {
+
+    const classKey =
+        "class" + user.currentClass;
+
+    if(!progress[classKey]) {
+
+        progress[classKey] = {};
+
+    }
+
+    const topicName =
+        selectedTopic[0];
+
+    if(!progress[classKey][topicName]) {
+
+        progress[classKey][topicName] = {
+
+            completed: false,
+            attempts: 0,
+            bestScore: 0,
+            questions: 0
+
+        };
+
+    }
+
+    const data =
+        progress[classKey][topicName];
+
+    data.attempts++;
+
+    data.questions += currentQuestions.length;
+
+    data.bestScore =
+        Math.max(data.bestScore, score);
+
+    if(score >= 80) {
+
+        data.completed = true;
+
+    }
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function renderProfile() {
+
+    document.getElementById("profileName").innerText =
+        user.name;
+
+    document.getElementById("profileClass").innerText =
+        "Class " + user.currentClass;
+
+    document.getElementById("profileAvatar").innerText =
+        user.name.charAt(0).toUpperCase();
+
+
+    const select =
+        document.getElementById("changeClassSelect");
+
+    select.innerHTML = "";
+
+    for(let i = 1; i <= 10; i++) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = i;
+
+        option.innerText =
+            "Class " + i;
+
+        if(i === user.currentClass) {
+
+            option.selected = true;
+
+        }
+
+        select.appendChild(option);
+
+    }
+
+
+    calculateStats();
+
+}
+
+
+function calculateStats() {
+
+    const classKey =
+        "class" + user.currentClass;
+
+    const classProgress =
+        progress[classKey] || {};
+
+    let completed = 0;
+    let questions = 0;
+    let best = 0;
+
+    Object.values(classProgress).forEach(topic => {
+
+        if(topic.completed) {
+
+            completed++;
+
+        }
+
+        questions += topic.questions || 0;
+
+        best =
+            Math.max(best, topic.bestScore || 0);
+
+    });
+
+    document.getElementById("topicsCompleted").innerText =
+        completed;
+
+    document.getElementById("questionsSolved").innerText =
+        questions;
+
+    document.getElementById("bestScore").innerText =
+        best + "%";
+
+}
+
+
+/* =====================================================
+   CLASS CHANGE
+===================================================== */
+
+function askChangeClass() {
+
+    const select =
+        document.getElementById("changeClassSelect");
+
+    const newClass =
+        Number(select.value);
+
+    if(newClass === user.currentClass) {
+
+        alert("You're already in Class " + newClass + ".");
+
+        return;
+
+    }
+
+    pendingClass = newClass;
+
+    document.getElementById("confirmText").innerText =
+        "Move from Class " +
+        user.currentClass +
+        " to Class " +
+        newClass +
+        "? Your current progress will be saved.";
+
+    document
+        .getElementById("confirmBox")
+        .classList.remove("hidden");
+
+}
+
+
+function confirmChangeClass() {
+
+    if(!pendingClass) return;
+
+    user.currentClass =
+        pendingClass;
+
+    pendingClass = null;
+
+    saveData();
+
+    document
+        .getElementById("confirmBox")
+        .classList.add("hidden");
+
+    updateAll();
+
+    showProfile();
+
+    alert(
+        "Class changed successfully! 🎓\n\n" +
+        "Welcome to Class " +
+        user.currentClass +
+        "!"
+    );
+
+}
+
+
+function cancelChangeClass() {
+
+    pendingClass = null;
+
+    document
+        .getElementById("confirmBox")
+        .classList.add("hidden");
+
+    document.getElementById("changeClassSelect").value =
+        user.currentClass;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function hidePages() {
+
+    document
+        .getElementById("homePage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("lessonPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("practicePage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("resultsPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("profilePage")
+        .classList.add("hidden");
+
+}
+
+
+function showHome() {
+
+    hidePages();
+
+    document
+        .getElementById("homePage")
+        .classList.remove("hidden");
+
+    setActiveNav("homeNav");
+
+    renderHome();
+
+}
+
+
+function showProfile() {
+
+    hidePages();
+
+    document
+        .getElementById("profilePage")
+        .classList.remove("hidden");
+
+    setActiveNav("profileNav");
+
+    renderProfile();
+
+}
+
+
+function setActiveNav(id) {
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+}
+
+
+/* =====================================================
+   UPDATE
+===================================================== */
+
+function updateAll() {
+
+    renderHome();
+    renderProfile();
+
+    document.getElementById("streakText").innerText =
+        calculateStreak();
+
+}
+
+
+function calculateStreak() {
+
+    let streak =
+        Number(localStorage.getItem("vedamathStreak") || 0);
+
+    const today =
+        new Date().toDateString();
+
+    const lastDay =
+        localStorage.getItem("vedamathLastDay");
+
+    if(lastDay !== today) {
+
+        if(lastDay) {
+
+            const last =
+                new Date(lastDay);
+
+            const now =
+                new Date();
+
+            const difference =
+                Math.floor(
+                    (now - last) /
+                    (1000 * 60 * 60 * 24)
+                );
+
+            if(difference === 1) {
+
+                streak++;
+
+            } else {
+
+                streak = 1;
+
+            }
+
+        } else {
+
+            streak = 1;
+
+        }
+
+        localStorage.setItem(
+            "vedamathStreak",
+            streak
+        );
+
+        localStorage.setItem(
+            "vedamathLastDay",
+            today
+        );
+
+    }
+
+    return streak;
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+initialize();
+
+</script>
+
+</body>
+</html>
